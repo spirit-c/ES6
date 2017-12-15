@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>函数扩展</title>
+    <style>
+        p,
+        li {
+            font-size: 20px;
+            padding: 0 10px;
+            line-height: 40px;
+        }
+
+    </style>
+</head>
+
+<body>
+    
+    <h1>name属性</h1>
+    <p>返回函数的名称</p>
+    <h1>参数默认值</h1>
+    <p>es6之前如果想对函数参数设置默认值，需要按照类似如下方式实现</p>
+    <p>
+        //es5 <br> function fn1(x){<br> var x = x || 'hello';<br> console.log(x);
+        <br> }
+        <br> fn1();
+        <br> e6允许在声明形参时直接设置其默认值
+        <br> //es6
+        <br> function fn2(x='hello'){<br> console.log(x);
+        <br> }
+        <br> fn2();
+        <br>
+    </p>
+    <h3>配合解构赋值一起使用</h3>
+    <p>
+        //数组解构<br> function fn1([x,y,z]){<br> console.log(z)
+        <br> }
+        <br> fn1([1,2]);
+        <br> //对象解构
+        <br> function fn2({x,y}){<br> console.log(x);
+        <br> }
+        <br> fn2({x:1,y:2});
+    </p>
+    <p>
+        //分析一下两种情况在传入相同的参数时，结果有什么区别<br> function fn({x,y}={x:1,y:3}){<br> console.log(x,y);
+        <br> }
+        <br><br> function fn1({x=1,y=3}={}){<br> console.log(x,y);
+        <br> }
+    </p>
+    <h1>length属性</h1>
+    <p>指定了默认值以后，函数的length属性，将返回没有指定默认值的参数个数。也就是说，指定了默认值后，length属性将失真。</p>
+    <h1>rest参数</h1>
+    <p>ES6 引入 rest 参数（形式为...变量名），用于获取函数的多余参数，这样就不需要使用arguments对象了。rest 参数搭配的变量是一个数组(即可以使用数组的相关方法，push,pop...)，该变量将多余的参数放入数组中。注意，rest 参数之后不能再有其他参数（即只能是最后一个参数），否则会报错</p>
+    <p>
+        function fn(...a){<br>
+            console.log(a);  //[1,2,3]<br>
+        }<br>
+        fn(1,2,3);
+    </p>
+    <h1>箭头函数</h1>
+    <p>ES6 允许使用“箭头”（=>）定义函数。</p>
+    <p>
+        //ES6<br> var f = x => x;<br> //ES5
+
+        <br> var f = function (x){<br> return x;<br> }
+    </p>
+    <p>如果箭头函数不需要参数或需要多个参数，就使用一个圆括号代表参数部分。</p>
+    <p>
+
+        ```javascript<br>
+        var f = () => 5;<br>
+        // 等同于<br>
+        var f = function () { return 5 };<br>
+
+        var sum = (num1, num2) => num1 + num2;<br>
+        // 等同于<br>
+        var sum = function(num1, num2) {<br>
+          return num1 + num2;<br>
+        };<br>
+        ```
+    </p>
+    <p>
+        如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用return语句返回。<br>
+        var sum = (num1, num2) => { return num1 + num2; }
+    </p>
+    <p>
+        由于大括号被解释为代码块，所以如果箭头函数直接返回一个对象，必须在对象外面加上括号，否则会报错。<br>
+
+        ```javascript<br>
+        // 报错<br>
+        let getTempItem = id => { id: id, name: "Temp" };<br>
+
+        // 不报错<br>
+        let getTempItem = id => ({ id: id, name: "Temp" });<br>
+        ```
+    </p>
+    <p>
+        箭头函数可以与变量解构结合使用。<br>
+
+        ```javascript<br>
+        const full = ({ first, last }) => first + ' ' + last;<br>
+
+        // 等同于<br>
+        function full(person) {<br>
+          return person.first + ' ' + person.last;<br>
+        }<br>
+        ```
+    </p>
+    <p>
+        rest 参数与箭头函数结合的例子。<br>
+
+        ```javascript<br>
+        const numbers = (...nums) => nums;<br>
+
+        numbers(1, 2, 3, 4, 5)<br>
+        // [1,2,3,4,5]<br>
+
+        const headAndTail = (head, ...tail) => [head, tail];<br>
+
+        headAndTail(1, 2, 3, 4, 5)<br>
+        // [1,[2,3,4,5]]<br>
+        ```
+    </p>
+    <h3>箭头函数自调用</h3>
+    <p>
+       ```javascript<br>
+        ((...x) => {console.log(x)})(1,2,3);<br>
+       ```
+    </p>
+    <h3>箭头函数this指针问题</h3>
+    <p>箭头函数没有自身的this,在其内部使用this,代表的是外层非箭头函数的this,如果没有外层非箭头函数，或者外层非箭头函数的调用者为window，则箭头函数内的this也指向window</p>
+    <p>正是由于箭头函数没有自身的this，所以箭头函数不能作为构造函数使用</p>
+</body>
+<script>
+   
+</script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>class(类)</title>
+    <style>
+        p,
+        li {
+            font-size: 20px;
+            padding: 0 10px;
+            line-height: 40px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <p>
+        ES6 提供了更接近传统语言的写法，引入了 Class（类）这个概念，作为对象的模板。通过`class`关键字，可以定义类。基本上，ES6 的`class`可以看作只是一个语法糖，它的绝大部分功能，ES5 都可以做到，新的`class`写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已。
+    </p>
+    <p>
+        //es5 <br> function Person(name,age){ <br>this.name = name; <br>this.age = age; <br>} <br>Person.prototype.sayName = function(){ <br> alert(this.name) <br>} <br>var p1 = new Person('李狗蛋',66); <br> p1.sayName() //'李狗蛋' <br>//es6 <br>class Person{ <br> constructor(name,age){ <br>this.name = name; <br>this.age = age; <br>} <br>//多个方法之间不加逗号 <br>sayName(){ <br>alert(this.name) <br>} <br>} <br>var p2 = new Person('李狗蛋',66); <br> p2.sayName() //'李狗蛋'
+    </p>
+    <p>
+        区别在于es5中，可以在原型（prototype）中添加属性，实例化之后的对象都将拥有该属性（可在__proto__中查看），而在es6的class中只能添加方法，且都是直接添加在原型中的，不能添加属性。
+    </p>
+    <h1>Class 的取值函数（getter）和存值函数（setter）</h1>
+    <p>
+        --取值函数（getter）:设置在获取 定义的属性时，执行的操作<br> --存值函数（setter）:设置在修改 定义的属性时，执行的操作<br>
+        <br> class Foo {<br> get prop(){<br> return 'hello world';<br> }
+        <br> set prop1(value){<br> console.log(value);
+        <br> }
+        <br> }
+        <br> var f = new Foo();<br> f.prop = 123; <br> console.log(f.prop)
+        <br>
+    </p>
+</body>
+</html>
